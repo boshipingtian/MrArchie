@@ -1,9 +1,9 @@
 <script setup>
 import { ref } from 'vue'
+import cronParser from 'cron-parser'
 
 const data = ref({})
 const Axios = inject('Axios')
-import cronParser from 'cron-parser'
 
 function getData() {
   Axios.get('/posts/1').then(res => {
@@ -13,19 +13,25 @@ function getData() {
   console.log('data', data)
 }
 
+
 // 测试cron-parse
 const interval = cronParser.parseExpression('*/5 * * * * *')
 for (let i = 0; i < 10; i++) {
   console.log('interval', interval.next().toString())
 }
+const range = ref([new Date().getTime(), new Date().getTime()])
+const value = ref("")
 
 </script>
 
 <template>
-    <div>
-        {{ data?.title }}
+    <!--日期输入区域-->
+    <div class="m-28 h-fit">
+      <n-space>
+        <n-input v-model:value="value" type="text" placeholder="输入cron表达式" />
+        <n-date-picker v-model:value="range" type="datetimerange" clearable />
+      </n-space>
     </div>
-    <n-button @click="getData">启动</n-button>
 </template>
 
 <style scoped>

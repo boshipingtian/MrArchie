@@ -1,40 +1,30 @@
 <script setup>
-
+import {darkTheme} from 'naive-ui'
+const theme = inject('theme');
+const changeTheme = () => {
+  theme.value = theme.value === null ? darkTheme : null;
+  localStorage.setItem('theme', theme.value === null ? 'light' : 'dark');
+  if (localStorage.getItem('theme') === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+    document.documentElement.classList.add('dark')
+  } else {
+    document.documentElement.classList.remove('dark')
+  }
+}
 </script>
 
 <template>
-    <div class="h-screen bg-amber-300 dark:bg-amber-500 transition-all">
+    <div class="h-screen bg-cyan-200 dark:bg-cyan-950 transition-all">
       <!--头像-->
-      <div class="flex justify-center items-center">
-        <div class="w-32 h-32 rounded-full bg-white">
-          <img src="@/assets/vue.svg" alt="头像" class="w-full h-full rounded-full" />
-        </div>
-      </div>
+      <n-h2>MrArchie</n-h2>
       <!--导航-->
       <div class="flex flex-col justify-center items-center">
-        <div class="flex flex-col justify-center items-center">
-          <div class="flex justify-center items-center">
-            <div class="w-8 h-8 rounded-full bg-white">
-              <img src="@/assets/vue.svg" alt="头像" class="w-full h-full rounded-full" />
-            </div>
-          </div>
-          <div class="flex justify-center items-center">
-            <div class="w-8 h-8 rounded-full bg-white">
-              <img src="@/assets/vue.svg" alt="头像" class="w-full h-full rounded-full" />
-            </div>
-          </div>
-          <div class="flex justify-center items-center">
-            <div class="w-8 h-8 rounded-full bg-white">
-              <img src="@/assets/vue.svg" alt="头像" class="w-full h-full rounded-full" />
-            </div>
-          </div>
+        <div>
+         <router-link to="/tools/cron">工具</router-link>
         </div>
       </div>
       <!-- 切换主题 -->
-      <div class="flex justify-center items-center">
-        <div class="w-8 h-8 rounded-full bg-white">
-          <img src="@/assets/vue.svg" alt="头像" class="w-full h-full rounded-full" />
-        </div>
+      <div class="flex justify-center items-center mt-3">
+        <n-button @click="changeTheme">切换主题</n-button>
       </div>
     </div>
 </template>
