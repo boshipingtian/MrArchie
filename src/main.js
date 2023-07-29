@@ -14,5 +14,5 @@ import 'vfonts/FiraCode.css'
 const app = createApp(App)
 app.use(router)
 app.use(naive)
-app.config.globalProperties.$axios = axios;
+app.provide('Axios', axios);
 app.mount('#app')

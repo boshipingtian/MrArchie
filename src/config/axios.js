@@ -1,6 +1,6 @@
 import axios from 'axios';
 import Qs from 'qs'; // 用来处理参数，可不使用，若要使用，npm安装： npm install qs
-axios.defaults.baseURL = 'http://127.0.0.1:8088'; // 请求的默认域名
+axios.defaults.baseURL = 'https://jsonplaceholder.typicode.com'; // 请求的默认域名
 // 添加一个请求拦截器
 axios.interceptors.request.use(config => {
         config.headers.languagetype = 'CN'; // 举例，加上一个公共头部
