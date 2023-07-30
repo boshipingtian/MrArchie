@@ -15,6 +15,7 @@ const switchShadow = ref('#70707033');
  * @param e
  */
 const changeTheme = (mode, e) => {
+  console.log(e)
   document.querySelectorAll(".mode-item").forEach(item => {
     if(item.classList.contains('active')){
       item.classList.remove('active');
