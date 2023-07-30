@@ -1,6 +1,6 @@
 <script setup>
 import {provide, ref} from 'vue'
-import {useOsTheme, darkTheme, zhCN, dateZhCN } from 'naive-ui'
+import {useOsTheme, darkTheme, zhCN, dateZhCN} from 'naive-ui'
 import SlideNavigation from "./components/SlideNavigation.vue";
 import lightThemeOverrides from "./theme/lightThemeOverrides";
 import darkThemeOverrides from "./theme/darkThemeOverrides";
@@ -21,21 +21,15 @@ if (localStorage.getItem('theme') === 'dark' || (!('theme' in localStorage) && w
 
 <template>
   <!--:theme-overrides="theme === null ? lightThemeOverrides : darkThemeOverrides"-->
-  <n-config-provider :locale="zhCN" :date-locale="dateZhCN" :theme="theme" preflight-style-disabled>
-    <n-global-style />
+  <n-config-provider :locale="zhCN" :date-locale="dateZhCN" :theme="theme" preflight-style-disabled :theme-overrides="theme === null ? lightThemeOverrides : darkThemeOverrides">
+    <n-global-style/>
     <n-message-provider>
-      <n-layout has-sider>
-        <n-layout-sider>
-          <SlideNavigation />
-        </n-layout-sider>
-        <n-layout>
-          <n-layout-header></n-layout-header>
-          <n-layout-content>
-            <router-view></router-view>
-          </n-layout-content>
-          <n-layout-footer></n-layout-footer>
-        </n-layout>
-      </n-layout>
+      <div class="flex">
+        <SlideNavigation/>
+        <div class="w-full flex-auto">
+          <router-view></router-view>
+        </div>
+      </div>
     </n-message-provider>
   </n-config-provider>
 </template>
